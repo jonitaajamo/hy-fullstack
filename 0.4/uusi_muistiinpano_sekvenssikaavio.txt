@@ -1,0 +1,18 @@
+title Uusi muistiinpano sekvenssikaavio
+
+Selain->Palvelin: HTTP POST: https://fullstack-exampleapp.herokuapp.com/new_note
+note over Palvelin: Palvelin tallettaa uuden viestin kantaan
+end note
+Selain->Palvelin: HTTP GET: https://fullstack-exampleapp.herokuapp.com/notes
+Palvelin-->Selain: HTML-dokumentti
+Selain->Palvelin: HTTP GET: https://fullstack-exampleapp.herokuapp.com/main.css
+Palvelin-->Selain: main.css
+Selain->Palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+Palvelin-->Selain: main.js
+note over Selain: js-koodi suoritetaan ja haetaan uusi json palvelimelta
+end note
+Selain->Palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+Palvelin-->Selain: data.json
+note over Selain: Selain renderöi uuden jsonin sisältämät tiedot
+end note
+
