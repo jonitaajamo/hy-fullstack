@@ -24,20 +24,23 @@ const Statistics = (values) => {
     return (
         <div>
             <h1>statistiikkaa</h1>
-            <Statistic type="hyvä" count={values.good}/>
-            <Statistic type="neutraali" count={values.neutral}/>
-            <Statistic type="huono" count={values.bad}/>
-            <Statistic type="yhteensä" count={values.sum}/>
-            <Statistic type="keskiarvo" count={average}/>
-            <Statistic type="positiivisia" count={positivePercentage}/>
+            <table>
+                <Statistic type="hyvä" count={values.good}/>
+                <Statistic type="neutraali" count={values.neutral}/>
+                <Statistic type="huono" count={values.bad}/>
+                <Statistic type="yhteensä" count={values.sum}/>
+                <Statistic type="keskiarvo" count={average}/>
+                <Statistic type="positiivisia" count={positivePercentage}/>
+            </table>
         </div>
     )
 }
 
 const Statistic = (props) => (
-    <div>
-        <p>{props.type}{' '}{props.count}</p>
-    </div>
+    <tr>
+        <td>{props.type}</td>
+        <td>{props.count}</td>
+    </tr>
 )
 
 const App = () => {
