@@ -37,10 +37,12 @@ const Statistics = (values) => {
 }
 
 const Statistic = (props) => (
-    <tr>
-        <td>{props.type}</td>
-        <td>{props.count}</td>
-    </tr>
+    <tbody>
+        <tr>
+            <td>{props.type}</td>
+            <td>{props.count}</td>
+        </tr>
+    </tbody>
 )
 
 const App = () => {
@@ -52,22 +54,12 @@ const App = () => {
     const [bad,
         setBad] = useState(0)
 
-    const setGoodValue = newValue => {
-        setGood(newValue)
-    }
-    const setNeutralValue = newValue => {
-        setNeutral(newValue)
-    }
-    const setBadValue = newValue => {
-        setBad(newValue)
-    }
-
     return (
         <div>
             <h1>anna palautetta</h1>
-            <Button handleClick={() => setGoodValue(good + 1)} name="hyvä"/>
-            <Button handleClick={() => setNeutralValue(neutral + 1)} name="neutraali"/>
-            <Button handleClick={() => setBadValue(bad + 1)} name="huono"/>
+            <Button handleClick={() => setGood(good + 1)} name="hyvä"/>
+            <Button handleClick={() => setNeutral(neutral + 1)} name="neutraali"/>
+            <Button handleClick={() => setBad(bad + 1)} name="huono"/>
             <Statistics
                 good={good}
                 neutral={neutral}
