@@ -52,10 +52,6 @@ const App = (props) => {
         setPoints(copy)
     }
 
-    const setSelectedValue = value => {
-        setSelected(value)
-    }
-
     let bestPoints = points.indexOf(Math.max(...points))
 
     return (
@@ -63,7 +59,7 @@ const App = (props) => {
             <AnecdoteOfDay anecdote={props.anecdotes[selected]} points={points[selected]}/>
             <Button handleClick={() => setPointValue()} text="vote"/>
             <Button
-                handleClick={() => setSelectedValue(Math.floor(Math.random() * props.anecdotes.length))}
+                handleClick={() => setSelected(Math.floor(Math.random() * props.anecdotes.length))}
                 text="next anecdote"/>
             <MostVoted anecdote={props.anecdotes[bestPoints]} points={points[bestPoints]}/>
         </div>
