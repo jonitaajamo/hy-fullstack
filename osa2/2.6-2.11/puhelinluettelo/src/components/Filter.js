@@ -4,8 +4,7 @@ const Filter = (props) => (
     <div>
         <h3>Rajaa</h3>
         rajaa näytettäviä:
-        <input value={props.value} onChange={props.onChange}/>
-
+        <input value={props.filter} onChange={props.onChange}/>
     </div>
 )
 

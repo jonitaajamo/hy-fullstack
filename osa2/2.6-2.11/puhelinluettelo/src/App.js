@@ -1,20 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Filter from './components/Filter'
-import Person from './components/Person'
 import PersonForm from './components/PersonForm'
 import Numbers from './components/Numbers'
 
+import axios from 'axios'
+
 const App = () => {
   const [persons,
-    setPersons] = useState([
-    {
-      name: 'Arto Hellas',
-      number: '050-6666420'
-    }, {
-      name: 'Matti Mattila',
-      number: '040-11111111'
-    }
-  ])
+    setPersons] = useState([])
 
   const [newName,
     setNewName] = useState('')
@@ -25,13 +18,23 @@ const App = () => {
   const [filter,
     setFilter] = useState('')
 
+  const [filteredList,
+    setFilteredList] = useState('')
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+      })
+  }, [])
+
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: newName,
       number: newNumber
     }
-
     if (persons.some(person => person.name === newName)) {
       window.alert(`${newName} on jo luettelossa`)
     } else {
@@ -52,25 +55,23 @@ const App = () => {
   }
 
   const handleFilterChange = (event) => {
-    event.preventDefault()
-    setFilter(event.target.value)
+    const newFilter = event.target.value
+    setFilter(newFilter)
+    const newFilteredList = persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
+    setFilteredList(newFilteredList)
   }
-
-  const personsToShow = persons
-    .filter(person => person.name.toLowerCase().includes(filter))
-    .map(person => <Person key={person.name} name={person.name} number={person.number}/>)
 
   return (
     <div>
       <h2>Puhelinluettelo</h2>
-      <Filter value={filter} onChange={handleFilterChange}/>
+      <Filter filter={filter} onChange={handleFilterChange}/>
       <PersonForm
         addPerson={addPerson}
         newName={newName}
         handlePersonChange={handlePersonChange}
         newNumber={newNumber}
         handleNumberChange={handleNumberChange}/>
-      <Numbers persons={personsToShow}/>
+      <Numbers persons={persons} filteredList={filteredList} filter={filter}/>
     </div>
   )
 }
