@@ -31,7 +31,9 @@ const CountryList = (props) => {
     <ul>
       {countries.length > 10
         ? "Too many matches, specify another filter"
-        : countries.map(country => <li key={country.name}>{country.name}</li>)}
+        : countries.map(country => <li key={country.name}>{country.name}
+          <button onClick={() => props.handleClick(country.name)}>show</button>
+        </li>)}
     </ul>
   )
 }
@@ -62,10 +64,17 @@ const App = () => {
   }, [])
 
   const filterChangeHandler = (event) => {
-    const newFilter = event.target.value
+    changeFilter(event.target.value)
+  }
+
+  const changeFilter = (newFilter) => {
     setFilter(newFilter)
     const filteredList = countryData.filter(country => country.name.toLowerCase().includes(newFilter.toLowerCase()))
     setFilteredCountries(filteredList)
+  }
+
+  const handleClick = (name) => {
+    changeFilter(name)
   }
 
   return (
@@ -77,7 +86,7 @@ const App = () => {
             capital={filteredCountries[0].capital}
             population={filteredCountries[0].population}
             imageUrl={filteredCountries[0].flag}/>
-        : <CountryList filteredCountries={filteredCountries}/>}
+        : <CountryList filteredCountries={filteredCountries} handleClick={handleClick}/>}
     </div>
   )
 }
