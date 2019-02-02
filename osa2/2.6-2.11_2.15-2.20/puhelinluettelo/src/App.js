@@ -3,6 +3,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Numbers from './components/Numbers'
 import NumberService from './services/numbers'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons,
@@ -118,27 +119,6 @@ const App = () => {
       setNotificationMessage(null)
       setErrorMessage(null)
     }, 5000);
-  }
-
-  const Notification = ({message}) => {
-    if (errorMessage === null && notificationMessage === null) {
-      return null
-    }
-
-    if (notificationMessage) {
-      return (
-        <div className="notification">
-          {notificationMessage}
-        </div>
-      )
-    } else {
-      return (
-        <div className="error">
-          {errorMessage}
-        </div>
-      )
-    }
-
   }
 
   return (
